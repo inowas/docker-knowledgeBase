@@ -1,12 +1,15 @@
 version: '2.1'
 services:
   nginx:
-    image: 'nginx:latest'
+    image: nginx:latest
+    restart: always
     container_name: nginx_proxy
     ports:
       - ${HTTP_PORT}:8000
     volumes:
       - ./nginx/config:/etc/nginx/conf.d/app.conf
+      - static-files:/static
+      - media-files:/media
 
   web:
     image: inowas/knowledgebase
